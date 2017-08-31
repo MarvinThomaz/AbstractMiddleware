@@ -41,6 +41,8 @@ namespace BaseMiddleware
 
             var response = request.CreateResponse(HttpStatusCode.NotFound);
 
+            response.ContentType = _contentType;
+
             await response.Body.WriteAsync(message);
         }
 
@@ -63,11 +65,13 @@ namespace BaseMiddleware
             var message = new ResponseMessage()
             {
                 Success = IsSuccessStatusCode(response.StatusCode),
-                Code = response.StatusCode,
+                Code = context.Response.StatusCode,
                 Errors = exception.Errors
             };
 
-            await _next(context);
+            context.Response.ContentType = _contentType;
+
+            await context.Response.Body.WriteAsync(message);
         }
 
         protected bool IsSuccessStatusCode(int code)
