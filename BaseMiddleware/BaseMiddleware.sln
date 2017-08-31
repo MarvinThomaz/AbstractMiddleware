@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BaseMiddleware", "BaseMiddleware\BaseMiddleware.shproj", "{ED03666C-6232-4B77-B601-D765A1C05D58}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BaseMiddleware\BaseMiddleware.projitems*{ed03666c-6232-4b77-b601-d765a1c05d58}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80816878-D366-4BA8-BCEF-8E71B05846B2}
+	EndGlobalSection
+EndGlobal
