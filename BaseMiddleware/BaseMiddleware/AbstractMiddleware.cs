@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System;
 
 namespace BaseMiddleware
 {
@@ -25,6 +26,10 @@ namespace BaseMiddleware
             catch (TException ex)
             {
                 await ConfigException(ex, context);
+            }
+            catch (Exception ex)
+            {
+                await ConfigUnknowException(ex, context);
             }
         }
 
@@ -67,6 +72,21 @@ namespace BaseMiddleware
                 Success = IsSuccessStatusCode(response.StatusCode),
                 Code = context.Response.StatusCode,
                 Errors = exception.Errors
+            };
+
+            context.Response.ContentType = _contentType;
+
+            await context.Response.Body.WriteAsync(message);
+        }
+
+        protected virtual async Task ConfigUnknowException(Exception exception, HttpContext context)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var message = new ResponseMessage()
+            {
+                Success = false,
+                Code = context.Response.StatusCode
             };
 
             context.Response.ContentType = _contentType;
